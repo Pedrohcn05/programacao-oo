@@ -1,17 +1,19 @@
+public class Main {
+    public static void main(String[] args) {
+        Contador contador1 = new Contador(5);
+        Contador contador2 = new Contador(0);
 
-void main() {
-  var c = Contador();
-  c.inc();
-  print(c.get());
-}
+        contador1.exibirValor();
+        contador1.incrementar();
+        contador1.exibirValor();
+        contador1.decrementar();
+        contador1.exibirValor();
+        contador1.zerar();
+        contador1.exibirValor();
 
-class Contador {
-  int valor = 0;
-
-  void inc() => valor++;
-  void dec() {
-    if (valor > 0) valor--;
-  }
-
-  int get() => valor;
+        contador2.exibirValor();
+        contador2.decrementar(); // já está em 0, não diminui
+        contador2.incrementar();
+        contador2.exibirValor();
+    }
 }
