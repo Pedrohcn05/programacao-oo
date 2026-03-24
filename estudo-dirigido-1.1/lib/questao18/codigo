@@ -1,0 +1,107 @@
+// Classe Musica
+public class Musica {
+    private String titulo;
+    private String artista;
+    private int duracaoSegundos;
+
+    // Construtor com validação
+    public Musica(String titulo, String artista, int duracaoSegundos) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Título da música não pode ser vazio.");
+        }
+        if (artista == null || artista.trim().isEmpty()) {
+            throw new IllegalArgumentException("Artista não pode ser vazio.");
+        }
+        if (duracaoSegundos <= 0) {
+            throw new IllegalArgumentException("Duração da música deve ser maior que 0 segundos.");
+        }
+        this.titulo = titulo;
+        this.artista = artista;
+        this.duracaoSegundos = duracaoSegundos;
+    }
+
+    // Método para exibir dados da música
+    public void exibirMusica() {
+        System.out.printf("Título: %s | Artista: %s | Duração: %d segundos%n", titulo, artista, duracaoSegundos);
+    }
+
+    // Getter para duração
+    public int getDuracaoSegundos() {
+        return duracaoSegundos;
+    }
+
+    // Getter para título
+    public String getTitulo() {
+        return titulo;
+    }
+
+    // Getter para artista
+    public String getArtista() {
+        return artista;
+    }
+}
+
+// Classe Playlist
+public class Playlist {
+    private String nome;
+    private Musica musica1;
+    private Musica musica2;
+    private Musica musica3;
+
+    // Construtor com validação
+    public Playlist(String nome, Musica musica1, Musica musica2, Musica musica3) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome da playlist não pode ser vazio.");
+        }
+        if (musica1 == null || musica2 == null || musica3 == null) {
+            throw new IllegalArgumentException("Todas as músicas devem ser fornecidas.");
+        }
+        this.nome = nome;
+        this.musica1 = musica1;
+        this.musica2 = musica2;
+        this.musica3 = musica3;
+    }
+
+    // Método para exibir playlist
+    public void exibirPlaylist() {
+        System.out.println("===== Playlist: " + nome + " =====");
+        musica1.exibirMusica();
+        musica2.exibirMusica();
+        musica3.exibirMusica();
+        System.out.println("Duração total: " + calcularDuracaoTotal() + " segundos");
+        System.out.println("=================================\n");
+    }
+
+    // Método para calcular duração total
+    public int calcularDuracaoTotal() {
+        return musica1.getDuracaoSegundos() + musica2.getDuracaoSegundos() + musica3.getDuracaoSegundos();
+    }
+
+    // Método para tocar playlist
+    public void tocarPlaylist() {
+        System.out.println("Tocando playlist: " + nome);
+        System.out.println("▶ " + musica1.getTitulo() + " - " + musica1.getArtista());
+        System.out.println("▶ " + musica2.getTitulo() + " - " + musica2.getArtista());
+        System.out.println("▶ " + musica3.getTitulo() + " - " + musica3.getArtista());
+        System.out.println("Fim da playlist\n");
+    }
+}
+
+// Classe Main
+public class Main {
+    public static void main(String[] args) {
+        // Criando 3 músicas
+        Musica m1 = new Musica("Imagine", "John Lennon", 183);
+        Musica m2 = new Musica("Bohemian Rhapsody", "Queen", 354);
+        Musica m3 = new Musica("Billie Jean", "Michael Jackson", 294);
+
+        // Criando 1 playlist com as 3 músicas
+        Playlist playlist = new Playlist("Hits Clássicos", m1, m2, m3);
+
+        // Exibindo playlist completa
+        playlist.exibirPlaylist();
+
+        // Tocando playlist
+        playlist.tocarPlaylist();
+    }
+}
