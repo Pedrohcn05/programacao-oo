@@ -1,0 +1,84 @@
+// Classe Comodo
+public class Comodo {
+    private String nome;
+    private double tamanho; // em metros quadrados
+
+    // Construtor com validação
+    public Comodo(String nome, double tamanho) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome do cômodo não pode ser vazio.");
+        }
+        if (tamanho <= 0) {
+            throw new IllegalArgumentException("Tamanho do cômodo deve ser maior que 0.");
+        }
+        this.nome = nome;
+        this.tamanho = tamanho;
+    }
+
+    // Métodos getters
+    public String getNome() {
+        return nome;
+    }
+
+    public double getTamanho() {
+        return tamanho;
+    }
+
+    // Método para exibir dados do cômodo
+    public void exibirComodo() {
+        System.out.printf("Cômodo: %s | Tamanho: %.2f m²%n", nome, tamanho);
+    }
+}
+
+// Classe Casa
+public class Casa {
+    private String proprietario;
+    private Comodo comodo1;
+    private Comodo comodo2;
+    private Comodo comodo3;
+
+    // Construtor com validação
+    public Casa(String proprietario, Comodo comodo1, Comodo comodo2, Comodo comodo3) {
+        if (proprietario == null || proprietario.trim().isEmpty()) {
+            throw new IllegalArgumentException("Proprietário não pode ser vazio.");
+        }
+        if (comodo1 == null || comodo2 == null || comodo3 == null) {
+            throw new IllegalArgumentException("Todos os cômodos devem ser fornecidos.");
+        }
+        this.proprietario = proprietario;
+        this.comodo1 = comodo1;
+        this.comodo2 = comodo2;
+        this.comodo3 = comodo3;
+    }
+
+    // Método para exibir dados da casa
+    public void exibirCasa() {
+        System.out.println("===== Casa do(a) " + proprietario + " =====");
+        comodo1.exibirComodo();
+        comodo2.exibirComodo();
+        comodo3.exibirComodo();
+        System.out.printf("Área total: %.2f m²%n", calcularAreaTotal());
+        System.out.println("================================\n");
+    }
+
+    // Método para calcular a área total
+    public double calcularAreaTotal() {
+        return comodo1.getTamanho() + comodo2.getTamanho() + comodo3.getTamanho();
+    }
+}
+
+// Classe Main
+public class Main {
+    public static void main(String[] args) {
+        // Criando 3 cômodos diferentes
+        Comodo c1 = new Comodo("Sala", 25.5);
+        Comodo c2 = new Comodo("Quarto", 18.0);
+        Comodo c3 = new Comodo("Cozinha", 12.3);
+
+        // Criando 1 casa com os 3 cômodos
+        Casa casa = new Casa("João", c1, c2, c3);
+
+        // Exibindo informações completas da casa
+        casa.exibirCasa();
+    }
+}
