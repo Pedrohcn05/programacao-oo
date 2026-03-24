@@ -1,14 +1,12 @@
+public class Main {
+    public static void main(String[] args) {
+        // Instanciando 3 pessoas diferentes
+        Pessoa pessoa1 = new Pessoa("Maria", 25);
+        Pessoa pessoa2 = new Pessoa("João", 30);
+        Pessoa pessoa3 = new Pessoa("Ana", 20);
 
-import 'pessoa.dart';
-
-void main() {
-  var pessoas = [
-    Pessoa("Ana", 20),
-    Pessoa("João", 30),
-    Pessoa("Maria", 25)
-  ];
-
-  for (var p in pessoas) {
-    p.exibirDados();
-  }
+        pessoa1.exibirDados();
+        pessoa2.exibirDados();
+        pessoa3.exibirDados();
+    }
 }
