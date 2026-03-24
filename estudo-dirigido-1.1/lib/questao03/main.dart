@@ -1,12 +1,13 @@
-void main() {
-  var d = Data(10, 3, 2025);
-  print(d);
-}
 
-class Data {
-  int dia, mes, ano;
+public class Main {
+    public static void main(String[] args) {
+        // Instanciando 3 datas diferentes
+        Data data1 = new Data(1, 1, 2020);
+        Data data2 = new Data(15, 6, 1995);
+        Data data3 = new Data(30, 12, 2025);
 
-  Data(this.dia, this.mes, this.ano);
-
-  String toString() => "$dia/$mes/$ano";
+        data1.exibirData();
+        data2.exibirData();
+        data3.exibirData();
+    }
 }
