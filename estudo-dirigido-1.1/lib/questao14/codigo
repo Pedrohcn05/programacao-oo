@@ -1,0 +1,68 @@
+// Classe Motor
+public class Motor {
+    private int potencia;
+    private String tipo;
+
+    // Construtor com validação
+    public Motor(int potencia, String tipo) {
+        if (potencia <= 0) {
+            throw new IllegalArgumentException("Potência deve ser maior que 0.");
+        }
+        if (tipo == null || tipo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tipo não pode ser vazio.");
+        }
+        this.potencia = potencia;
+        this.tipo = tipo;
+    }
+
+    // Método para exibir dados do motor
+    public void exibirMotor() {
+        System.out.println("----- Dados do Motor -----");
+        System.out.println("Potência: " + potencia + " CV");
+        System.out.println("Tipo: " + tipo);
+        System.out.println("--------------------------");
+    }
+}
+
+// Classe Carro
+public class Carro {
+    private String modelo;
+    private Motor motor;
+
+    // Construtor com validação
+    public Carro(String modelo, Motor motor) {
+        if (modelo == null || modelo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Modelo não pode ser vazio.");
+        }
+        if (motor == null) {
+            throw new IllegalArgumentException("Motor deve ser fornecido.");
+        }
+        this.modelo = modelo;
+        this.motor = motor;
+    }
+
+    // Método para exibir dados do carro
+    public void exibirCarro() {
+        System.out.println("===== Dados do Carro =====");
+        System.out.println("Modelo: " + modelo);
+        motor.exibirMotor(); // exibe dados do motor
+        System.out.println("==========================\n");
+    }
+}
+
+// Classe Main
+public class Main {
+    public static void main(String[] args) {
+        // Criando 2 motores diferentes
+        Motor motor1 = new Motor(150, "Flex");
+        Motor motor2 = new Motor(200, "Diesel");
+
+        // Criando 2 carros diferentes, cada um com um motor
+        Carro carro1 = new Carro("Toyota Corolla", motor1);
+        Carro carro2 = new Carro("Ford Ranger", motor2);
+
+        // Exibindo os dados completos de cada carro
+        carro1.exibirCarro();
+        carro2.exibirCarro();
+    }
+}
