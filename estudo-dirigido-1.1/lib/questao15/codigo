@@ -1,0 +1,65 @@
+// Classe Cofrinho
+public class Cofrinho {
+    private double saldo;
+    private int quantidadeDepositos;
+
+    // Construtor
+    public Cofrinho(double saldoInicial) {
+        if (saldoInicial < 0) {
+            throw new IllegalArgumentException("Saldo inicial deve ser maior ou igual a 0.");
+        }
+        this.saldo = saldoInicial;
+        this.quantidadeDepositos = 0;
+    }
+
+    // Método para depositar
+    public void depositar(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor do depósito deve ser maior que 0.");
+        }
+        saldo += valor;
+        quantidadeDepositos++;
+        System.out.printf("Depósito de R$ %.2f realizado. Saldo atual: R$ %.2f%n", valor, saldo);
+    }
+
+    // Método para quebrar o cofrinho
+    public void quebrar() {
+        System.out.printf("Cofrinho quebrado! Total acumulado: R$ %.2f%n", saldo);
+        saldo = 0;
+        quantidadeDepositos = 0;
+    }
+
+    // Método para exibir saldo atual
+    public void exibirSaldo() {
+        System.out.printf("Saldo atual: R$ %.2f%n", saldo);
+    }
+
+    // Getter para quantidade de depósitos
+    public int getQuantidadeDepositos() {
+        return quantidadeDepositos;
+    }
+}
+
+// Classe Main
+public class Main {
+    public static void main(String[] args) {
+        // Instanciando 1 cofrinho com saldo inicial 0
+        Cofrinho cofrinho = new Cofrinho(0);
+
+        // Realizando vários depósitos
+        cofrinho.depositar(50);
+        cofrinho.depositar(20.5);
+        cofrinho.depositar(100);
+
+        // Exibindo saldo atual
+        cofrinho.exibirSaldo();
+        System.out.println("Quantidade de depósitos: " + cofrinho.getQuantidadeDepositos());
+
+        // Quebrando o cofrinho
+        cofrinho.quebrar();
+
+        // Exibindo saldo e depósitos após quebrar
+        cofrinho.exibirSaldo();
+        System.out.println("Quantidade de depósitos após quebrar: " + cofrinho.getQuantidadeDepositos());
+    }
+}
