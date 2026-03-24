@@ -1,0 +1,114 @@
+// Classe Pokemon
+public class Pokemon {
+    private int numero;
+    private String nome;
+    private String tipo;
+    private int nivel;
+    private int hp;
+
+    // Construtor com validação
+    public Pokemon(int numero, String nome, String tipo, int nivel, int hp) {
+        if (numero <= 0) {
+            throw new IllegalArgumentException("Número do Pokémon deve ser maior que 0.");
+        }
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome do Pokémon não pode ser vazio.");
+        }
+        if (tipo == null || tipo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Tipo do Pokémon não pode ser vazio.");
+        }
+        if (nivel < 1 || nivel > 100) {
+            throw new IllegalArgumentException("Nível deve estar entre 1 e 100.");
+        }
+        if (hp <= 0) {
+            throw new IllegalArgumentException("HP deve ser maior que 0.");
+        }
+        this.numero = numero;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.nivel = nivel;
+        this.hp = hp;
+    }
+
+    // Método para exibir dados do Pokémon
+    public void exibirPokemon() {
+        System.out.printf("Número: %d | Nome: %s | Tipo: %s | Nível: %d | HP: %d%n",
+                numero, nome, tipo, nivel, hp);
+    }
+
+    // Getter para nível
+    public int getNivel() {
+        return nivel;
+    }
+
+    // Getter para nome
+    public String getNome() {
+        return nome;
+    }
+}
+
+// Classe Treinador
+public class Treinador {
+    private String nome;
+    private Pokemon pokemon1;
+    private Pokemon pokemon2;
+    private Pokemon pokemon3;
+
+    // Construtor com validação
+    public Treinador(String nome, Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome do treinador não pode ser vazio.");
+        }
+        if (pokemon1 == null || pokemon2 == null || pokemon3 == null) {
+            throw new IllegalArgumentException("Todos os pokémons devem ser fornecidos.");
+        }
+        this.nome = nome;
+        this.pokemon1 = pokemon1;
+        this.pokemon2 = pokemon2;
+        this.pokemon3 = pokemon3;
+    }
+
+    // Método para exibir time completo
+    public void exibirTime() {
+        System.out.println("===== Time do Treinador: " + nome + " =====");
+        pokemon1.exibirPokemon();
+        pokemon2.exibirPokemon();
+        pokemon3.exibirPokemon();
+        System.out.println("Poder total: " + calcularPoderTotal());
+        System.out.println("Pokémon mais forte: " + pokemonMaisForte().getNome());
+        System.out.println("============================================\n");
+    }
+
+    // Método para calcular poder total (soma dos níveis)
+    public int calcularPoderTotal() {
+        return pokemon1.getNivel() + pokemon2.getNivel() + pokemon3.getNivel();
+    }
+
+    // Método para obter o Pokémon mais forte
+    public Pokemon pokemonMaisForte() {
+        Pokemon maisForte = pokemon1;
+        if (pokemon2.getNivel() > maisForte.getNivel()) {
+            maisForte = pokemon2;
+        }
+        if (pokemon3.getNivel() > maisForte.getNivel()) {
+            maisForte = pokemon3;
+        }
+        return maisForte;
+    }
+}
+
+// Classe Main
+public class Main {
+    public static void main(String[] args) {
+        // Criando 3 pokémons
+        Pokemon p1 = new Pokemon(1, "Pikachu", "Elétrico", 50, 120);
+        Pokemon p2 = new Pokemon(2, "Charizard", "Fogo/Voador", 70, 200);
+        Pokemon p3 = new Pokemon(3, "Bulbasaur", "Grama/Venenoso", 45, 100);
+
+        // Criando 1 treinador com os 3 pokémons
+        Treinador treinador = new Treinador("Ash", p1, p2, p3);
+
+        // Exibindo todas as informações do time
+        treinador.exibirTime();
+    }
+}
