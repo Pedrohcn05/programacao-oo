@@ -1,12 +1,19 @@
-void main() {
-  var d = Data(10, 3, 2025);
-  print(d);
-}
+public class Main {
+    public static void main(String[] args) {
+        Lampada lampada = new Lampada();
 
-class Data {
-  int dia, mes, ano;
+        lampada.exibirEstado();
+        lampada.ligar();
+        lampada.exibirEstado();
+        lampada.desligar();
+        lampada.exibirEstado();
+        lampada.ligar();
+        lampada.desligar();
+        lampada.ligar();
+        lampada.desligar();
+        lampada.ligar(); // 5ª vez -> deve queimar
+        lampada.exibirEstado();
 
-  Data(this.dia, this.mes, this.ano);
-
-  String toString() => "$dia/$mes/$ano";
+        lampada.ligar();
+    }
 }
