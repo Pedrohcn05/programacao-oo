@@ -1,16 +1,11 @@
-void main() {
-  var c = Contador();
-  c.inc();
-  print(c.get());
-}
+public class Main {
+    public static void main(String[] args) {
+        Endereco endereco1 = new Endereco("Rua das Flores", 123, "Jardim Primavera", "São Paulo", "SP", 12345678);
+        Endereco endereco2 = new Endereco("Avenida Brasil", 987, "Centro", "Rio de Janeiro", "RJ", 87654321);
+        Endereco endereco3 = new Endereco("Travessa do Sol", 50, "Vila Nova", "Belo Horizonte", "MG", 23456789);
 
-class Contador {
-  int valor = 0;
-
-  void inc() => valor++;
-  void dec() {
-    if (valor > 0) valor--;
-  }
-
-  int get() => valor;
+        endereco1.exibirEndereco();
+        endereco2.exibirEndereco();
+        endereco3.exibirEndereco();
+    }
 }
