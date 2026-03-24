@@ -1,0 +1,58 @@
+// Classe Pessoa
+public class Pessoa {
+    private String nome;
+    private int idade;
+    private String cpf;
+    private Endereco endereco;
+
+    // Construtor com validação
+    public Pessoa(String nome, int idade, String cpf, Endereco endereco) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");
+        }
+        if (idade < 0) {
+            throw new IllegalArgumentException("Idade deve ser maior ou igual a 0.");
+        }
+        if (cpf == null || cpf.trim().isEmpty()) {
+            throw new IllegalArgumentException("CPF não pode ser vazio.");
+        }
+        if (endereco == null) {
+            throw new IllegalArgumentException("Endereço deve ser fornecido.");
+        }
+
+        this.nome = nome;
+        this.idade = idade;
+        this.cpf = cpf;
+        this.endereco = endereco;
+    }
+
+    // Método para exibir os dados da pessoa
+    public void exibirPessoa() {
+        System.out.println("===== Dados da Pessoa =====");
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade + " anos");
+        System.out.println("CPF: " + cpf);
+        endereco.exibirEndereco(); // exibe os dados do endereço
+        System.out.println("===========================\n");
+    }
+}
+
+// Classe Main
+public class Main {
+    public static void main(String[] args) {
+        // Criando 3 endereços diferentes
+        Endereco endereco1 = new Endereco("Rua das Flores", 123, "Jardim Primavera", "São Paulo", "SP", 12345678);
+        Endereco endereco2 = new Endereco("Avenida Brasil", 987, "Centro", "Rio de Janeiro", "RJ", 87654321);
+        Endereco endereco3 = new Endereco("Travessa do Sol", 50, "Vila Nova", "Belo Horizonte", "MG", 23456789);
+
+        // Instanciando 3 pessoas diferentes com seus respectivos endereços
+        Pessoa pessoa1 = new Pessoa("Maria Silva", 25, "123.456.789-00", endereco1);
+        Pessoa pessoa2 = new Pessoa("João Santos", 30, "987.654.321-00", endereco2);
+        Pessoa pessoa3 = new Pessoa("Ana Costa", 20, "111.222.333-44", endereco3);
+
+        // Exibindo os dados completos de cada pessoa
+        pessoa1.exibirPessoa();
+        pessoa2.exibirPessoa();
+        pessoa3.exibirPessoa();
+    }
+}
