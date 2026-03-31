@@ -1,0 +1,15 @@
+a) Por que o controle remoto consegue alterar diretamente o estado da televisão?
+Porque o controle remoto recebe a televisão como parâmetro e guarda uma referência para ela.
+Assim, quando ele chama:
+_tv.aumentarVolume();
+ele está acessando o mesmo objeto de televisão, não uma cópia.
+b) O controle remoto possui uma cópia da televisão ou uma referência?
+Ele possui uma referência para o mesmo objeto.
+Como perceber isso no resultado?
+Porque:
+Você altera usando o controle
+Mas o resultado aparece quando imprime a tv
+Ou seja:
+controle.aumentarVolume();
+tv.exibirEstado();
+O volume mudou mesmo sem mexer diretamente na tv
