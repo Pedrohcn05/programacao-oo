@@ -1,75 +1,83 @@
-// Classe Produto
-public class Produto {
-    private int codigo;
-    private String nome;
-    private double precoUnitario;
-    private int quantidade;
+class Produto {
+  int codigo;
+  String nome;
+  double precoUnitario;
+  int quantidade;
 
-    // Construtor com validação
-    public Produto(int codigo, String nome, double precoUnitario, int quantidade) {
-        if (codigo <= 0) {
-            throw new IllegalArgumentException("Código deve ser maior que 0.");
-        }
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio.");
-        }
-        if (precoUnitario <= 0) {
-            throw new IllegalArgumentException("Preço unitário deve ser maior que 0.");
-        }
-        if (quantidade <= 0) {
-            throw new IllegalArgumentException("Quantidade deve ser maior que 0.");
-        }
+  // Construtor com validação
+  Produto(this.codigo, this.nome, this.precoUnitario, this.quantidade) {
+    validar();
+  }
 
-        this.codigo = codigo;
-        this.nome = nome;
-        this.precoUnitario = precoUnitario;
-        this.quantidade = quantidade;
+  // Método para validar os dados
+  void validar() {
+    if (codigo <= 0) {
+      throw ArgumentError("Código deve ser maior que 0.");
     }
-
-    // Método para calcular desconto baseado na quantidade
-    public double calcularDesconto() {
-        if (quantidade >= 20) return 0.15 * precoUnitario * quantidade;
-        if (quantidade >= 10) return 0.10 * precoUnitario * quantidade;
-        if (quantidade >= 5) return 0.05 * precoUnitario * quantidade;
-        return 0.0;
+    if (nome.isEmpty) {
+      throw ArgumentError("Nome não pode ser vazio.");
     }
-
-    // Método para calcular total com desconto
-    public double calcularTotal() {
-        return precoUnitario * quantidade - calcularDesconto();
+    if (precoUnitario <= 0) {
+      throw ArgumentError("Preço unitário deve ser maior que 0.");
     }
-
-    // Método para exibir resumo do produto
-    public void exibirResumo() {
-        System.out.println("----- Resumo do Produto -----");
-        System.out.println("Código: " + codigo);
-        System.out.println("Nome: " + nome);
-        System.out.printf("Preço unitário: R$ %.2f%n", precoUnitario);
-        System.out.println("Quantidade: " + quantidade);
-        System.out.printf("Desconto: R$ %.2f%n", calcularDesconto());
-        System.out.printf("Total: R$ %.2f%n", calcularTotal());
-        System.out.println("-----------------------------\n");
+    if (quantidade <= 0) {
+      throw ArgumentError("Quantidade deve ser maior que 0.");
     }
+  }
 
-    // Métodos para atualizar os atributos
-    public void setCodigo(int codigo) { this.codigo = codigo; }
-    public void setNome(String nome) { this.nome = nome; }
-    public void setPrecoUnitario(double precoUnitario) { this.precoUnitario = precoUnitario; }
-    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
+  // Método para calcular desconto
+  double calcularDesconto() {
+    double totalBruto = precoUnitario * quantidade;
+
+    if (quantidade >= 20) {
+      return totalBruto * 0.15;
+    } else if (quantidade >= 10) {
+      return totalBruto * 0.10;
+    } else if (quantidade >= 5) {
+      return totalBruto * 0.05;
+    } else {
+      return 0.0;
+    }
+  }
+
+  // Método para calcular total com desconto
+  double calcularTotal() {
+    double totalBruto = precoUnitario * quantidade;
+    return totalBruto - calcularDesconto();
+  }
+
+  // Método para exibir resumo
+  void exibirResumo() {
+    print("Código: $codigo");
+    print("Nome: $nome");
+    print("Preço Unitário: R\$ ${precoUnitario.toStringAsFixed(2)}");
+    print("Quantidade: $quantidade");
+    print("Desconto: R\$ ${calcularDesconto().toStringAsFixed(2)}");
+    print("Total: R\$ ${calcularTotal().toStringAsFixed(2)}");
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Instanciando 1 produto
-        Produto produto = new Produto(1, "Notebook", 3500.00, 3);
-        produto.exibirResumo();
+void main() {
+  try {
+    // Instanciando 1 produto
+    Produto produto = Produto(1, "Notebook", 3500.00, 3);
 
-        // Alterando atributos do produto
-        produto.setCodigo(2);
-        produto.setNome("Smartphone");
-        produto.setPrecoUnitario(1500.00);
-        produto.setQuantidade(12);
-        produto.exibirResumo();
-    }
+    // Exibindo resumo inicial
+    produto.exibirResumo();
+
+    // Alterando os atributos
+    produto.codigo = 2;
+    produto.nome = "Mouse Gamer";
+    produto.precoUnitario = 150.00;
+    produto.quantidade = 12;
+
+    // Validando novamente após alteração
+    produto.validar();
+
+    // Exibindo novo resumo
+    produto.exibirResumo();
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
