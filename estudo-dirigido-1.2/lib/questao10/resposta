@@ -1,0 +1,10 @@
+a) Por que alterarValor() modifica o objeto original?
+Porque a função recebe uma referência para o mesmo objeto.
+Alterar atributos internos (_valor) afeta o objeto que existe na memória, então o valor da caixa original muda.
+b) Por que trocarCaixa() não substitui a caixa criada no main?
+Porque c = Caixa(200) só altera a variável local c dentro da função.
+A referência original (minhaCaixa) no main continua apontando para o objeto antigo.
+Não há retorno, então o objeto no main não é substituído.
+c) O que esse resultado mostra sobre a diferença entre alterar um objeto e reatribuir uma variável de referência?
+Alterar um objeto → afeta todas as referências que apontam para ele.
+Reatribuir uma variável → muda apenas a referência local; outras referências continuam apontando para o objeto antigo.
