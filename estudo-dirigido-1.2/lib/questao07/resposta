@@ -1,0 +1,15 @@
+a) Por que ao alterar a segunda variável a primeira também mudou?
+Porque p1 e p2 estão apontando para o mesmo objeto na memória.
+Quando você faz:
+var p2 = p1;
+você não cria uma cópia, apenas cria outra referência para o mesmo objeto.
+Ou seja:
+Existe um único objeto
+Duas variáveis apontam para ele
+
+b) Esse comportamento está correto?
+Sim, está totalmente correto.
+Isso acontece porque em Dart os objetos são manipulados por referência.
+Conceito:
+Variáveis guardam o endereço do objeto na memória, não o objeto em si.
+Alterar o objeto por qualquer referência afeta todas.
