@@ -1,85 +1,93 @@
-// Classe Personagem
-public class Personagem {
-    private String nome;
-    private int vida;
-    private int ataque;
+class Personagem {
+  String nome;
+  int vida;
+  int ataque;
 
-    // Construtor com validação
-    public Personagem(String nome, int vida, int ataque) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio.");
-        }
-        if (vida <= 0) {
-            throw new IllegalArgumentException("Vida deve ser maior que 0.");
-        }
-        if (ataque <= 0) {
-            throw new IllegalArgumentException("Ataque deve ser maior que 0.");
-        }
-        this.nome = nome;
-        this.vida = vida;
-        this.ataque = ataque;
+  // Construtor com validação
+  Personagem(this.nome, this.vida, this.ataque) {
+    if (nome.isEmpty) {
+      throw ArgumentError("O nome não pode ser vazio.");
+    }
+    if (vida <= 0) {
+      throw ArgumentError("A vida deve ser maior que 0.");
+    }
+    if (ataque <= 0) {
+      throw ArgumentError("O ataque deve ser maior que 0.");
+    }
+  }
+
+  // Verifica se está vivo
+  bool estaVivo() {
+    return vida > 0;
+  }
+
+  // Atacar outro personagem
+  void atacar(Personagem inimigo) {
+    if (!estaVivo()) {
+      print("$nome não pode atacar, está derrotado.");
+      return;
     }
 
-    // Método para atacar outro personagem
-    public void atacar(Personagem inimigo) {
-        if (!estaVivo()) {
-            System.out.println(nome + " não pode atacar porque está morto!");
-            return;
-        }
-        if (!inimigo.estaVivo()) {
-            System.out.println(inimigo.nome + " já está morto!");
-            return;
-        }
-        System.out.println(nome + " ataca " + inimigo.nome + " causando " + ataque + " de dano.");
-        inimigo.vida -= ataque;
-        if (inimigo.vida < 0) {
-            inimigo.vida = 0;
-        }
+    if (!inimigo.estaVivo()) {
+      print("$nome não pode atacar ${inimigo.nome}, ele já está derrotado.");
+      return;
     }
 
-    // Método para exibir status do personagem
-    public void exibirStatus() {
-        System.out.println("Nome: " + nome + " | Vida: " + vida + " | Ataque: " + ataque);
+    inimigo.vida -= ataque;
+
+    // Evita vida negativa
+    if (inimigo.vida < 0) {
+      inimigo.vida = 0;
     }
 
-    // Método para verificar se está vivo
-    public boolean estaVivo() {
-        return vida > 0;
-    }
+    print("$nome atacou ${inimigo.nome} causando $ataque de dano.");
+  }
+
+  // Exibir status
+  void exibirStatus() {
+    print("Nome: $nome");
+    print("Vida: $vida");
+    print("Ataque: $ataque");
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Criando 2 personagens
-        Personagem p1 = new Personagem("Guerreiro", 50, 10);
-        Personagem p2 = new Personagem("Mago", 40, 12);
+void main() {
+  try {
+    // Criando 2 personagens
+    Personagem p1 = Personagem("Guerreiro", 50, 10);
+    Personagem p2 = Personagem("Orc", 40, 8);
 
-        // Exibindo status inicial
-        System.out.println("Status inicial:");
+    // Status inicial
+    print("Status inicial:");
+    p1.exibirStatus();
+    p2.exibirStatus();
+
+    print("=== INÍCIO DO COMBATE ===");
+
+    // Simulação de combate
+    while (p1.estaVivo() && p2.estaVivo()) {
+      p1.atacar(p2);
+      p2.exibirStatus();
+
+      if (p2.estaVivo()) {
+        p2.atacar(p1);
         p1.exibirStatus();
-        p2.exibirStatus();
-        System.out.println();
+      }
 
-        // Simulando combate
-        int rodada = 1;
-        while (p1.estaVivo() && p2.estaVivo()) {
-            System.out.println("=== Rodada " + rodada + " ===");
-            p1.atacar(p2);
-            p2.atacar(p1);
-            p1.exibirStatus();
-            p2.exibirStatus();
-            System.out.println();
-            rodada++;
-        }
-
-        // Resultado do combate
-        if (p1.estaVivo()) {
-            System.out.println(p1.nome + " venceu o combate!");
-        } else if (p2.estaVivo()) {
-            System.out.println(p2.nome + " venceu o combate!");
-        } else {
-            System.out.println("Ambos os personagens morreram!");
-        }
+      print("----------------------");
     }
+
+    print("=== FIM DO COMBATE ===");
+
+    // Resultado final
+    if (p1.estaVivo()) {
+      print("${p1.nome} venceu!");
+    } else {
+      print("${p2.nome} venceu!");
+    }
+
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
