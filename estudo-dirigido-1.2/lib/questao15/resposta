@@ -1,0 +1,13 @@
+a) Qual é a vantagem de usar construtores nomeados nesse caso?
+Permite criar vários tipos de objetos da mesma classe com diferentes inicializações de forma clara.
+Evita confusão de parâmetros no construtor único.
+Facilita leitura e manutenção do código, pois fica explícito o tipo de funcionário que está sendo criado.
+b) O que muda no estado inicial de cada objeto conforme o construtor utilizado?
+Estagiário → _cargo = 'Estagiário', _salario = 1500
+Pleno → _cargo = 'Pleno', _salario = valor informado
+Gerente → _cargo = 'Gerente', _salario = 5000 + bônus
+Ou seja, cada construtor define o estado inicial do objeto de forma específica.
+c) Por que pode ser melhor definir o cargo e salário já no construtor em vez de criar métodos separados?
+Garante que o objeto sempre é criado em um estado válido.
+Evita que o programador precise lembrar de chamar métodos extras depois da criação.
+Reduz erros e mantém consistência e imutabilidade inicial.
