@@ -1,0 +1,7 @@
+a) Por que a quilometragem do carro foi alterada mesmo sem retornar um novo objeto?
+Porque o método revisar() recebeu uma referência para o mesmo objeto meuCarro.
+Alterar atributos do objeto através dessa referência modifica o objeto original na memória.
+b) O parâmetro recebido pelo método revisar() representa um novo carro ou o mesmo objeto criado no main?
+Ele representa o mesmo objeto criado no main(), não uma cópia.
+Em Dart, objetos são passados por referência.
+Portanto, qualquer modificação feita dentro do método é refletida no objeto original.
