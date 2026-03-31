@@ -1,53 +1,52 @@
-// Classe Circulo
-public class Circulo {
-    private double raio;
-    private String cor;
-    private static final double PI = 3.14; // constante para π
+class Circulo {
+  double raio;
+  String cor;
 
-    // Construtor com validação
-    public Circulo(double raio, String cor) {
-        if (raio <= 0) {
-            throw new IllegalArgumentException("O raio deve ser maior que 0.");
-        }
-        if (cor == null || cor.trim().isEmpty()) {
-            throw new IllegalArgumentException("A cor não pode ser vazia.");
-        }
-        this.raio = raio;
-        this.cor = cor;
-    }
+  // Constante PI
+  static const double PI = 3.14;
 
-    // Método para calcular área
-    public double calcularArea() {
-        return PI * raio * raio;
+  // Construtor com validação
+  Circulo(this.raio, this.cor) {
+    if (raio <= 0) {
+      throw ArgumentError("O raio deve ser maior que 0.");
     }
+    if (cor.isEmpty) {
+      throw ArgumentError("A cor não pode ser vazia.");
+    }
+  }
 
-    // Método para calcular perímetro
-    public double calcularPerimetro() {
-        return 2 * PI * raio;
-    }
+  // Área
+  double calcularArea() {
+    return PI * raio * raio;
+  }
 
-    // Método para exibir resumo
-    public void exibirResumo() {
-        System.out.println("----- Resumo do Círculo -----");
-        System.out.println("Raio: " + raio);
-        System.out.println("Cor: " + cor);
-        System.out.printf("Área: %.2f%n", calcularArea());
-        System.out.printf("Perímetro: %.2f%n", calcularPerimetro());
-        System.out.println("-----------------------------\n");
-    }
+  // Perímetro (circunferência)
+  double calcularPerimetro() {
+    return 2 * PI * raio;
+  }
+
+  // Resumo
+  void exibirResumo() {
+    print("Raio: $raio");
+    print("Cor: $cor");
+    print("Área: ${calcularArea().toStringAsFixed(2)}");
+    print("Perímetro: ${calcularPerimetro().toStringAsFixed(2)}");
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Instanciando 3 círculos diferentes
-        Circulo c1 = new Circulo(5, "Vermelho");
-        Circulo c2 = new Circulo(3.5, "Azul");
-        Circulo c3 = new Circulo(7, "Verde");
+void main() {
+  try {
+    // Instanciando exatamente 3 círculos
+    Circulo c1 = Circulo(2.5, "Azul");
+    Circulo c2 = Circulo(4.0, "Vermelho");
+    Circulo c3 = Circulo(1.8, "Verde");
 
-        // Exibindo resumo de cada círculo
-        c1.exibirResumo();
-        c2.exibirResumo();
-        c3.exibirResumo();
-    }
+    // Exibindo os resumos
+    c1.exibirResumo();
+    c2.exibirResumo();
+    c3.exibirResumo();
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
