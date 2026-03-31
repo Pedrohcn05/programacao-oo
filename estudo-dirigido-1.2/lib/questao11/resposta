@@ -1,0 +1,14 @@
+a) Por que a alteração no endereço de um cliente não modificou o endereço do outro?
+Porque cada cliente possui uma instância separada de Endereco.
+Alterar o endereço de cliente2 afeta somente esse objeto, não o cliente1.
+b) O que foi feito nesse exercício para evitar o compartilhamento da mesma referência de Endereco?
+No construtor de cópia Cliente.copia() criamos uma nova instância de Endereco com os mesmos dados:
+_endereco = Endereco(outro._endereco._rua,
+                     outro._endereco._numero,
+                     outro._endereco._cidade);
+Assim, cada cliente tem um objeto Endereco independente.
+c) Qual é a diferença entre copiar a referência de um objeto e criar uma nova instância com os mesmos dados?
+Copiar referência → duas variáveis apontam para o mesmo objeto.
+Alterações em uma aparecem na outra.
+Criar nova instância com mesmos dados → cada variável tem seu próprio objeto.
+Alterações em uma não afetam a outra.
