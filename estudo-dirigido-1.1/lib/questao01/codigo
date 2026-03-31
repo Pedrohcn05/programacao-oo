@@ -1,40 +1,37 @@
-// Classe Pessoa
-public class Pessoa {
-    private String nome;
-    private int idade;
+class Pessoa {
+  String nome;
+  int idade;
 
-    // Construtor
-    public Pessoa(String nome, int idade) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome não pode ser vazio.");
-        }
-        if (idade < 0) {
-            throw new IllegalArgumentException("A idade não pode ser negativa.");
-        }
-        this.nome = nome;
-        this.idade = idade;
+  // Construtor com validação
+  Pessoa(this.nome, this.idade) {
+    if (nome.isEmpty) {
+      throw ArgumentError("O nome não pode ser vazio.");
     }
+    if (idade < 0) {
+      throw ArgumentError("A idade deve ser maior ou igual a 0.");
+    }
+  }
 
-    // Método para exibir os dados
-    public void exibirDados() {
-        System.out.println("----- Dados da Pessoa -----");
-        System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + idade + " anos");
-        System.out.println("---------------------------\n");
-    }
+  // Método para exibir os dados
+  void exibirDados() {
+    print("Nome: $nome");
+    print("Idade: $idade");
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Instanciando 3 pessoas diferentes
-        Pessoa pessoa1 = new Pessoa("Maria", 25);
-        Pessoa pessoa2 = new Pessoa("João", 30);
-        Pessoa pessoa3 = new Pessoa("Ana", 20);
+void main() {
+  try {
+    // Instanciando exatamente 3 pessoas
+    Pessoa p1 = Pessoa("João", 25);
+    Pessoa p2 = Pessoa("Maria", 30);
+    Pessoa p3 = Pessoa("Carlos", 18);
 
-        // Exibindo os dados de cada pessoa
-        pessoa1.exibirDados();
-        pessoa2.exibirDados();
-        pessoa3.exibirDados();
-    }
+    // Exibindo os dados
+    p1.exibirDados();
+    p2.exibirDados();
+    p3.exibirDados();
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
