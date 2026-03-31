@@ -1,60 +1,61 @@
-// Classe Contador
-public class Contador {
-    private int valor;
+class Contador {
+  int valor;
 
-    // Construtor com valor inicial
-    public Contador(int valorInicial) {
-        if (valorInicial < 0) {
-            throw new IllegalArgumentException("O valor inicial deve ser maior ou igual a 0.");
-        }
-        this.valor = valorInicial;
+  // Construtor com validação
+  Contador(this.valor) {
+    if (valor < 0) {
+      throw ArgumentError("O valor inicial deve ser maior ou igual a 0.");
     }
+  }
 
-    // Método para incrementar
-    public void incrementar() {
-        valor++;
-    }
+  // Incrementar
+  void incrementar() {
+    valor++;
+    print("Incrementado: $valor");
+  }
 
-    // Método para decrementar
-    public void decrementar() {
-        if (valor > 0) {
-            valor--;
-        } else {
-            System.out.println("O contador já está em 0, não pode ser negativo.");
-        }
+  // Decrementar
+  void decrementar() {
+    if (valor > 0) {
+      valor--;
     }
+    print("Decrementado: $valor");
+  }
 
-    // Método para zerar
-    public void zerar() {
-        valor = 0;
-    }
+  // Zerar
+  void zerar() {
+    valor = 0;
+    print("Contador zerado.");
+  }
 
-    // Método para exibir valor atual
-    public void exibirValor() {
-        System.out.println("Valor atual do contador: " + valor);
-    }
+  // Exibir valor
+  void exibirValor() {
+    print("Valor atual: $valor");
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Instanciando dois contadores diferentes
-        Contador contador1 = new Contador(5);
-        Contador contador2 = new Contador(0);
+void main() {
+  try {
+    // Instanciando exatamente 2 contadores
+    Contador c1 = Contador(5);
+    Contador c2 = Contador(0);
 
-        // Operações com contador1
-        contador1.exibirValor();
-        contador1.incrementar();
-        contador1.exibirValor();
-        contador1.decrementar();
-        contador1.exibirValor();
-        contador1.zerar();
-        contador1.exibirValor();
+    // Operações com o primeiro contador
+    c1.exibirValor();
+    c1.incrementar();
+    c1.incrementar();
+    c1.decrementar();
+    c1.exibirValor();
 
-        // Operações com contador2
-        contador2.exibirValor();
-        contador2.decrementar(); // já está em 0, não diminui
-        contador2.incrementar();
-        contador2.exibirValor();
-    }
+    // Operações com o segundo contador
+    c2.exibirValor();
+    c2.decrementar(); // não pode ficar negativo
+    c2.incrementar();
+    c2.incrementar();
+    c2.zerar();
+    c2.exibirValor();
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
