@@ -1,0 +1,13 @@
+a) Por que a alteração feita na carteira por p2 também apareceu quando o objeto foi acessado por p1?
+Porque p1 e p2 apontam para o mesmo objeto Pessoa.
+Alterar o saldo da carteira via uma referência afeta o mesmo objeto na memória, então é visível em todas as referências.
+b) Em termos conceituais, as variáveis p1 e p2 armazenam o objeto inteiro ou uma referência para ele?
+Elas armazenam uma referência (endereço) para o objeto, não o objeto inteiro.
+c) Onde ficam as variáveis locais e onde ficam os objetos criados dinamicamente?
+Variáveis locais (p1, p2) → ficam na stack (pilha).
+Objetos (Pessoa, Carteira) → são criados dinamicamente na heap.
+d) Em que momento os objetos Pessoa e Carteira ficam elegíveis para garbage collector?
+Quando não houver mais nenhuma referência apontando para eles, ou seja:
+Neste ponto, o garbage collector pode liberar a memória da heap
+p1 = null;
+p2 = null;
