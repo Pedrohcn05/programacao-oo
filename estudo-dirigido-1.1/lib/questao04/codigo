@@ -1,79 +1,86 @@
-// Classe Lampada
-public class Lampada {
-    private boolean ligada;
-    private int quantidadeLigacoes;
-    private boolean queimada;
+class Lampada {
+  bool ligada;
+  int quantidadeLigacoes;
+  bool queimada;
 
-    // Construtor
-    public Lampada() {
-        this.ligada = false;
-        this.quantidadeLigacoes = 0;
-        this.queimada = false;
+  // Construtor padrão
+  Lampada()
+      : ligada = false,
+        quantidadeLigacoes = 0,
+        queimada = false;
+
+  // Método para ligar
+  void ligar() {
+    if (queimada) {
+      print("A lâmpada está queimada e não pode ser ligada.");
+      return;
     }
 
-    // Método para ligar a lâmpada
-    public void ligar() {
-        if (queimada) {
-            System.out.println("Não é possível ligar: a lâmpada está queimada.");
-            return;
-        }
+    if (!ligada) {
+      ligada = true;
+      quantidadeLigacoes++;
 
-        if (!ligada) {
-            ligada = true;
-            quantidadeLigacoes++;
-            System.out.println("Lâmpada ligada.");
+      print("Lâmpada ligada.");
 
-            if (quantidadeLigacoes >= 5) {
-                queimada = true;
-                ligada = false;
-                System.out.println("A lâmpada queimou!");
-            }
-        } else {
-            System.out.println("A lâmpada já está ligada.");
-        }
+      // Verifica se queimou
+      if (quantidadeLigacoes >= 5) {
+        queimada = true;
+        ligada = false;
+        print("A lâmpada queimou!");
+      }
+    }
+  }
+
+  // Método para desligar
+  void desligar() {
+    if (ligada) {
+      ligada = false;
+      print("Lâmpada desligada.");
+    }
+  }
+
+  // Método para exibir estado
+  void exibirEstado() {
+    if (queimada) {
+      print("Estado: Queimada");
+    } else if (ligada) {
+      print("Estado: Ligada");
+    } else {
+      print("Estado: Desligada");
     }
 
-    // Método para desligar a lâmpada
-    public void desligar() {
-        if (ligada) {
-            ligada = false;
-            System.out.println("Lâmpada desligada.");
-        } else if (!queimada) {
-            System.out.println("A lâmpada já está desligada.");
-        }
-    }
-
-    // Método para exibir o estado
-    public void exibirEstado() {
-        if (queimada) {
-            System.out.println("Estado da lâmpada: QUEIMADA");
-        } else if (ligada) {
-            System.out.println("Estado da lâmpada: LIGADA");
-        } else {
-            System.out.println("Estado da lâmpada: DESLIGADA");
-        }
-    }
+    print("Quantidade de ligações: $quantidadeLigacoes");
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        Lampada lampada = new Lampada();
+void main() {
+  // Instanciando 1 lâmpada
+  Lampada lampada = Lampada();
 
-        // Simulando o uso da lâmpada
-        lampada.exibirEstado();
-        lampada.ligar();
-        lampada.exibirEstado();
-        lampada.desligar();
-        lampada.exibirEstado();
-        lampada.ligar();
-        lampada.desligar();
-        lampada.ligar();
-        lampada.desligar();
-        lampada.ligar(); // 5ª vez -> deve queimar
-        lampada.exibirEstado();
+  // Simulando uso
+  lampada.exibirEstado();
 
-        // Tentativa de ligar após queimar
-        lampada.ligar();
-    }
+  lampada.ligar();
+  lampada.exibirEstado();
+
+  lampada.desligar();
+  lampada.exibirEstado();
+
+  lampada.ligar();
+  lampada.desligar();
+
+  lampada.ligar();
+  lampada.desligar();
+
+  lampada.ligar();
+  lampada.desligar();
+
+  // Quinta vez (vai queimar)
+  lampada.ligar();
+  lampada.exibirEstado();
+
+  // Tentando ligar após queimada
+  lampada.ligar();
+  lampada.exibirEstado();
 }
