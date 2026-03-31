@@ -1,0 +1,8 @@
+a) Qual é a diferença prática entre criar uma agenda vazia e criar uma agenda já com contatos?
+Agenda.vazia() → começa sem contatos, lista interna _contatos é inicializada vazia.
+Agenda.comContatos(List<Contato> contatos) → já começa com uma lista de contatos existente, pronta para uso.
+Praticamente, a primeira exige adicionar contatos depois, a segunda já carrega contatos iniciais.
+b) Quando uma lista de objetos é passada para o construtor, os contatos são recriados ou a agenda passa a usar as referências recebidas?
+A agenda usa as referências recebidas.
+Ou seja, qualquer alteração em um Contato da lista externa também é refletida na agenda, porque não houve cópia profunda, apenas referência compartilhada.
+ 
