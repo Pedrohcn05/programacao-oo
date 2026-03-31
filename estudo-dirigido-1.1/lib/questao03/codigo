@@ -1,43 +1,42 @@
-// Classe Data
-public class Data {
-    private int dia;
-    private int mes;
-    private int ano;
+class Data {
+  int dia;
+  int mes;
+  int ano;
 
-    // Construtor com validação
-    public Data(int dia, int mes, int ano) {
-        if (dia < 1 || dia > 31) {
-            throw new IllegalArgumentException("Dia deve estar entre 1 e 31.");
-        }
-        if (mes < 1 || mes > 12) {
-            throw new IllegalArgumentException("Mês deve estar entre 1 e 12.");
-        }
-        if (ano <= 0) {
-            throw new IllegalArgumentException("Ano deve ser maior que 0.");
-        }
-
-        this.dia = dia;
-        this.mes = mes;
-        this.ano = ano;
+  // Construtor com validação
+  Data(this.dia, this.mes, this.ano) {
+    if (dia < 1 || dia > 31) {
+      throw ArgumentError("Dia deve estar entre 1 e 31.");
     }
-
-    // Método para exibir a data
-    public void exibirData() {
-        System.out.printf("%02d/%02d/%04d%n", dia, mes, ano);
+    if (mes < 1 || mes > 12) {
+      throw ArgumentError("Mês deve estar entre 1 e 12.");
     }
+    if (ano <= 0) {
+      throw ArgumentError("Ano deve ser maior que 0.");
+    }
+  }
+
+  // Método para exibir a data formatada
+  void exibirData() {
+    String d = dia.toString().padLeft(2, '0');
+    String m = mes.toString().padLeft(2, '0');
+
+    print("$d/$m/$ano");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Instanciando 3 datas diferentes
-        Data data1 = new Data(1, 1, 2020);
-        Data data2 = new Data(15, 6, 1995);
-        Data data3 = new Data(30, 12, 2025);
+void main() {
+  try {
+    // Instanciando exatamente 3 datas
+    Data d1 = Data(1, 1, 2024);
+    Data d2 = Data(15, 8, 2023);
+    Data d3 = Data(31, 12, 2025);
 
-        // Exibindo cada data
-        data1.exibirData();
-        data2.exibirData();
-        data3.exibirData();
-    }
+    // Exibindo as datas
+    d1.exibirData();
+    d2.exibirData();
+    d3.exibirData();
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
