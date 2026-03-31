@@ -1,87 +1,79 @@
-// Classe Semaforo
-public class Semaforo {
-    private String corAtual;
-    private int tempoRestante;
+class Semaforo {
+  String corAtual; // "vermelho", "verde", "amarelo"
+  int tempoRestante;
 
-    // Constantes de tempo
-    private static final int TEMPO_VERMELHO = 5;
-    private static final int TEMPO_VERDE = 4;
-    private static final int TEMPO_AMARELO = 2;
+  // Construtor com validação
+  Semaforo(this.corAtual, this.tempoRestante) {
+    if (!_corValida(corAtual)) {
+      throw ArgumentError("Cor inválida.");
+    }
+    if (tempoRestante <= 0) {
+      throw ArgumentError("Tempo deve ser maior que 0.");
+    }
+  }
 
-    // Construtor com validação
-    public Semaforo(String corInicial) {
-        if (!corInicial.equalsIgnoreCase("vermelho") &&
-            !corInicial.equalsIgnoreCase("verde") &&
-            !corInicial.equalsIgnoreCase("amarelo")) {
-            throw new IllegalArgumentException("Cor inválida. Use vermelho, verde ou amarelo.");
-        }
-        this.corAtual = corInicial.toLowerCase();
-        reiniciarTempo();
+  // Validação de cor
+  bool _corValida(String cor) {
+    return cor == "vermelho" || cor == "verde" || cor == "amarelo";
+  }
+
+  // Retorna emoji da cor
+  String getEmoji() {
+    switch (corAtual) {
+      case "vermelho":
+        return "🔴";
+      case "verde":
+        return "🟢";
+      case "amarelo":
+        return "🟡";
+      default:
+        return "";
+    }
+  }
+
+  // Trocar cor seguindo a ordem
+  void trocarCor() {
+    if (corAtual == "vermelho") {
+      corAtual = "verde";
+      tempoRestante = 4;
+    } else if (corAtual == "verde") {
+      corAtual = "amarelo";
+      tempoRestante = 2;
+    } else if (corAtual == "amarelo") {
+      corAtual = "vermelho";
+      tempoRestante = 5;
     }
 
-    // Método para trocar cor seguindo a ordem vermelho -> verde -> amarelo -> vermelho
-    public void trocarCor() {
-        switch (corAtual) {
-            case "vermelho":
-                corAtual = "verde";
-                break;
-            case "verde":
-                corAtual = "amarelo";
-                break;
-            case "amarelo":
-                corAtual = "vermelho";
-                break;
-        }
-        reiniciarTempo();
-    }
+    print("Cor alterada para ${getEmoji()} ($corAtual)");
+  }
 
-    // Método para reduzir o tempo restante
-    public void reduzirTempo() {
-        tempoRestante--;
-        if (tempoRestante <= 0) {
-            trocarCor();
-        }
-    }
+  // Reduz tempo
+  void reduzirTempo() {
+    tempoRestante--;
 
-    // Método para reiniciar o tempo conforme a cor atual
-    private void reiniciarTempo() {
-        switch (corAtual) {
-            case "vermelho":
-                tempoRestante = TEMPO_VERMELHO;
-                break;
-            case "verde":
-                tempoRestante = TEMPO_VERDE;
-                break;
-            case "amarelo":
-                tempoRestante = TEMPO_AMARELO;
-                break;
-        }
+    if (tempoRestante <= 0) {
+      trocarCor();
     }
+  }
 
-    // Método para exibir o estado atual
-    public void exibirEstado() {
-        String emoji = "";
-        switch (corAtual) {
-            case "vermelho": emoji = "🔴"; break;
-            case "verde": emoji = "🟢"; break;
-            case "amarelo": emoji = "🟡"; break;
-        }
-        System.out.println("Semáforo: " + emoji + " (" + corAtual + ") - Tempo restante: " + tempoRestante);
-    }
+  // Exibir estado
+  void exibirEstado() {
+    print("Semáforo: ${getEmoji()} ($corAtual) | Tempo: $tempoRestante");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Instanciando 1 semáforo com cor inicial vermelho
-        Semaforo semaforo = new Semaforo("vermelho");
+void main() {
+  try {
+    // Criando 1 semáforo (inicia no vermelho)
+    Semaforo semaforo = Semaforo("vermelho", 5);
 
-        // Simulando alguns ciclos (ex.: 20 unidades de tempo)
-        for (int i = 1; i <= 20; i++) {
-            System.out.println("Unidade de tempo " + i);
-            semaforo.exibirEstado();
-            semaforo.reduzirTempo();
-            System.out.println();
-        }
+    // Simulando funcionamento por ciclos
+    for (int i = 0; i < 15; i++) {
+      semaforo.exibirEstado();
+      semaforo.reduzirTempo();
     }
+
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
