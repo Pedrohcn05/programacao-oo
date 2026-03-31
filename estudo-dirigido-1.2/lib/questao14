@@ -1,0 +1,8 @@
+a) Por que os dois gerentes conseguem alterar o mesmo saldo?
+Porque ambos recebem uma referência para o mesmo objeto Conta.
+Alterações feitas por qualquer gerente afetam o mesmo objeto na memória, então o saldo reflete todas as operações.
+b) Cada gerente possui uma conta própria ou ambos estão operando sobre a mesma instância?
+Ambos estão operando sobre a mesma instância da conta.
+Nenhum gerente criou uma nova conta.
+O objeto Conta é compartilhado entre eles.
+ 
