@@ -1,114 +1,105 @@
-// Classe Pokemon
-public class Pokemon {
-    private int numero;
-    private String nome;
-    private String tipo;
-    private int nivel;
-    private int hp;
+class Pokemon {
+  int numero;
+  String nome;
+  String tipo;
+  int nivel;
+  int hp;
 
-    // Construtor com validação
-    public Pokemon(int numero, String nome, String tipo, int nivel, int hp) {
-        if (numero <= 0) {
-            throw new IllegalArgumentException("Número do Pokémon deve ser maior que 0.");
-        }
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do Pokémon não pode ser vazio.");
-        }
-        if (tipo == null || tipo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Tipo do Pokémon não pode ser vazio.");
-        }
-        if (nivel < 1 || nivel > 100) {
-            throw new IllegalArgumentException("Nível deve estar entre 1 e 100.");
-        }
-        if (hp <= 0) {
-            throw new IllegalArgumentException("HP deve ser maior que 0.");
-        }
-        this.numero = numero;
-        this.nome = nome;
-        this.tipo = tipo;
-        this.nivel = nivel;
-        this.hp = hp;
+  // Construtor com validação
+  Pokemon(this.numero, this.nome, this.tipo, this.nivel, this.hp) {
+    if (numero <= 0) {
+      throw ArgumentError("Número deve ser maior que 0.");
     }
+    if (nome.isEmpty) {
+      throw ArgumentError("Nome não pode ser vazio.");
+    }
+    if (tipo.isEmpty) {
+      throw ArgumentError("Tipo não pode ser vazio.");
+    }
+    if (nivel < 1 || nivel > 100) {
+      throw ArgumentError("Nível deve estar entre 1 e 100.");
+    }
+    if (hp <= 0) {
+      throw ArgumentError("HP deve ser maior que 0.");
+    }
+  }
 
-    // Método para exibir dados do Pokémon
-    public void exibirPokemon() {
-        System.out.printf("Número: %d | Nome: %s | Tipo: %s | Nível: %d | HP: %d%n",
-                numero, nome, tipo, nivel, hp);
-    }
-
-    // Getter para nível
-    public int getNivel() {
-        return nivel;
-    }
-
-    // Getter para nome
-    public String getNome() {
-        return nome;
-    }
+  void exibirPokemon() {
+    print("Nº: $numero");
+    print("Nome: $nome");
+    print("Tipo: $tipo");
+    print("Nível: $nivel");
+    print("HP: $hp");
+    print("----------------------");
+  }
 }
 
-// Classe Treinador
-public class Treinador {
-    private String nome;
-    private Pokemon pokemon1;
-    private Pokemon pokemon2;
-    private Pokemon pokemon3;
+class Treinador {
+  String nome;
+  Pokemon pokemon1;
+  Pokemon pokemon2;
+  Pokemon pokemon3;
 
-    // Construtor com validação
-    public Treinador(String nome, Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do treinador não pode ser vazio.");
-        }
-        if (pokemon1 == null || pokemon2 == null || pokemon3 == null) {
-            throw new IllegalArgumentException("Todos os pokémons devem ser fornecidos.");
-        }
-        this.nome = nome;
-        this.pokemon1 = pokemon1;
-        this.pokemon2 = pokemon2;
-        this.pokemon3 = pokemon3;
+  // Construtor com validação
+  Treinador(this.nome, this.pokemon1, this.pokemon2, this.pokemon3) {
+    if (nome.isEmpty) {
+      throw ArgumentError("Nome do treinador não pode ser vazio.");
+    }
+  }
+
+  // Exibir time completo
+  void exibirTime() {
+    print("🎮 Treinador: $nome");
+    print("======================");
+
+    pokemon1.exibirPokemon();
+    pokemon2.exibirPokemon();
+    pokemon3.exibirPokemon();
+  }
+
+  // Calcular poder total (soma dos níveis)
+  int calcularPoderTotal() {
+    return pokemon1.nivel + pokemon2.nivel + pokemon3.nivel;
+  }
+
+  // Encontrar o pokémon mais forte
+  void pokemonMaisForte() {
+    Pokemon maisForte = pokemon1;
+
+    if (pokemon2.nivel > maisForte.nivel) {
+      maisForte = pokemon2;
+    }
+    if (pokemon3.nivel > maisForte.nivel) {
+      maisForte = pokemon3;
     }
 
-    // Método para exibir time completo
-    public void exibirTime() {
-        System.out.println("===== Time do Treinador: " + nome + " =====");
-        pokemon1.exibirPokemon();
-        pokemon2.exibirPokemon();
-        pokemon3.exibirPokemon();
-        System.out.println("Poder total: " + calcularPoderTotal());
-        System.out.println("Pokémon mais forte: " + pokemonMaisForte().getNome());
-        System.out.println("============================================\n");
-    }
-
-    // Método para calcular poder total (soma dos níveis)
-    public int calcularPoderTotal() {
-        return pokemon1.getNivel() + pokemon2.getNivel() + pokemon3.getNivel();
-    }
-
-    // Método para obter o Pokémon mais forte
-    public Pokemon pokemonMaisForte() {
-        Pokemon maisForte = pokemon1;
-        if (pokemon2.getNivel() > maisForte.getNivel()) {
-            maisForte = pokemon2;
-        }
-        if (pokemon3.getNivel() > maisForte.getNivel()) {
-            maisForte = pokemon3;
-        }
-        return maisForte;
-    }
+    print("🔥 Pokémon mais forte:");
+    print("Nome: ${maisForte.nome}");
+    print("Nível: ${maisForte.nivel}");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Criando 3 pokémons
-        Pokemon p1 = new Pokemon(1, "Pikachu", "Elétrico", 50, 120);
-        Pokemon p2 = new Pokemon(2, "Charizard", "Fogo/Voador", 70, 200);
-        Pokemon p3 = new Pokemon(3, "Bulbasaur", "Grama/Venenoso", 45, 100);
+void main() {
+  try {
+    // Criando pokémons
+    Pokemon p1 = Pokemon(25, "Pikachu", "Elétrico", 50, 120);
+    Pokemon p2 = Pokemon(6, "Charizard", "Fogo", 70, 200);
+    Pokemon p3 = Pokemon(9, "Blastoise", "Água", 65, 180);
 
-        // Criando 1 treinador com os 3 pokémons
-        Treinador treinador = new Treinador("Ash", p1, p2, p3);
+    // Criando treinador
+    Treinador treinador = Treinador("Ash", p1, p2, p3);
 
-        // Exibindo todas as informações do time
-        treinador.exibirTime();
-    }
+    // Exibindo time
+    treinador.exibirTime();
+
+    // Poder total
+    int poder = treinador.calcularPoderTotal();
+    print("⚡ Poder total do time: $poder");
+
+    // Pokémon mais forte
+    treinador.pokemonMaisForte();
+
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
