@@ -1,58 +1,95 @@
-// Classe Pessoa
-public class Pessoa {
-    private String nome;
-    private int idade;
-    private String cpf;
-    private Endereco endereco;
+class Endereco {
+  String rua;
+  int numero;
+  String bairro;
+  String cidade;
+  String estado;
+  int cep;
 
-    // Construtor com validação
-    public Pessoa(String nome, int idade, String cpf, Endereco endereco) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio.");
-        }
-        if (idade < 0) {
-            throw new IllegalArgumentException("Idade deve ser maior ou igual a 0.");
-        }
-        if (cpf == null || cpf.trim().isEmpty()) {
-            throw new IllegalArgumentException("CPF não pode ser vazio.");
-        }
-        if (endereco == null) {
-            throw new IllegalArgumentException("Endereço deve ser fornecido.");
-        }
-
-        this.nome = nome;
-        this.idade = idade;
-        this.cpf = cpf;
-        this.endereco = endereco;
+  Endereco(this.rua, this.numero, this.bairro, this.cidade, this.estado, this.cep) {
+    if (rua.isEmpty) {
+      throw ArgumentError("Rua não pode ser vazia.");
     }
-
-    // Método para exibir os dados da pessoa
-    public void exibirPessoa() {
-        System.out.println("===== Dados da Pessoa =====");
-        System.out.println("Nome: " + nome);
-        System.out.println("Idade: " + idade + " anos");
-        System.out.println("CPF: " + cpf);
-        endereco.exibirEndereco(); // exibe os dados do endereço
-        System.out.println("===========================\n");
+    if (numero <= 0) {
+      throw ArgumentError("Número deve ser maior que 0.");
     }
+    if (bairro.isEmpty) {
+      throw ArgumentError("Bairro não pode ser vazio.");
+    }
+    if (cidade.isEmpty) {
+      throw ArgumentError("Cidade não pode ser vazia.");
+    }
+    if (estado.isEmpty) {
+      throw ArgumentError("Estado não pode ser vazio.");
+    }
+    if (cep <= 0) {
+      throw ArgumentError("CEP inválido.");
+    }
+  }
+
+  String formatarCep() {
+    String cepStr = cep.toString().padLeft(8, '0');
+    return "${cepStr.substring(0, 5)}-${cepStr.substring(5)}";
+  }
+
+  void exibirEndereco() {
+    print("Rua: $rua, Nº $numero");
+    print("Bairro: $bairro");
+    print("Cidade: $cidade - $estado");
+    print("CEP: ${formatarCep()}");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Criando 3 endereços diferentes
-        Endereco endereco1 = new Endereco("Rua das Flores", 123, "Jardim Primavera", "São Paulo", "SP", 12345678);
-        Endereco endereco2 = new Endereco("Avenida Brasil", 987, "Centro", "Rio de Janeiro", "RJ", 87654321);
-        Endereco endereco3 = new Endereco("Travessa do Sol", 50, "Vila Nova", "Belo Horizonte", "MG", 23456789);
+class Pessoa {
+  String nome;
+  int idade;
+  String cpf;
+  Endereco endereco;
 
-        // Instanciando 3 pessoas diferentes com seus respectivos endereços
-        Pessoa pessoa1 = new Pessoa("Maria Silva", 25, "123.456.789-00", endereco1);
-        Pessoa pessoa2 = new Pessoa("João Santos", 30, "987.654.321-00", endereco2);
-        Pessoa pessoa3 = new Pessoa("Ana Costa", 20, "111.222.333-44", endereco3);
-
-        // Exibindo os dados completos de cada pessoa
-        pessoa1.exibirPessoa();
-        pessoa2.exibirPessoa();
-        pessoa3.exibirPessoa();
+  // Construtor com validação
+  Pessoa(this.nome, this.idade, this.cpf, this.endereco) {
+    if (nome.isEmpty) {
+      throw ArgumentError("Nome não pode ser vazio.");
     }
+    if (idade < 0) {
+      throw ArgumentError("Idade deve ser maior ou igual a 0.");
+    }
+    if (cpf.isEmpty) {
+      throw ArgumentError("CPF não pode ser vazio.");
+    }
+    if (endereco == null) {
+      throw ArgumentError("Endereço deve ser válido.");
+    }
+  }
+
+  // Método para exibir pessoa + endereço
+  void exibirPessoa() {
+    print("Nome: $nome");
+    print("Idade: $idade");
+    print("CPF: $cpf");
+    print("Endereço:");
+    endereco.exibirEndereco();
+    print("----------------------");
+  }
+}
+
+void main() {
+  try {
+    // Criando endereços
+    Endereco e1 = Endereco("Rua A", 100, "Centro", "Curitiba", "PR", 80000000);
+    Endereco e2 = Endereco("Av. Brasil", 200, "Jardim", "São Paulo", "SP", 12345678);
+    Endereco e3 = Endereco("Rua das Flores", 300, "Bela Vista", "Porto Alegre", "RS", 90012345);
+
+    // Criando pessoas (cada uma com seu endereço)
+    Pessoa p1 = Pessoa("João", 25, "123.456.789-00", e1);
+    Pessoa p2 = Pessoa("Maria", 30, "987.654.321-00", e2);
+    Pessoa p3 = Pessoa("Carlos", 20, "111.222.333-44", e3);
+
+    // Exibindo dados completos
+    p1.exibirPessoa();
+    p2.exibirPessoa();
+    p3.exibirPessoa();
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
