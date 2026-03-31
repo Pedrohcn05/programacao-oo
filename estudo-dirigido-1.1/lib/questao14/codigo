@@ -1,68 +1,62 @@
-// Classe Motor
-public class Motor {
-    private int potencia;
-    private String tipo;
+class Motor {
+  int potencia;
+  String tipo;
 
-    // Construtor com validação
-    public Motor(int potencia, String tipo) {
-        if (potencia <= 0) {
-            throw new IllegalArgumentException("Potência deve ser maior que 0.");
-        }
-        if (tipo == null || tipo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Tipo não pode ser vazio.");
-        }
-        this.potencia = potencia;
-        this.tipo = tipo;
+  // Construtor com validação
+  Motor(this.potencia, this.tipo) {
+    if (potencia <= 0) {
+      throw ArgumentError("A potência deve ser maior que 0.");
     }
+    if (tipo.isEmpty) {
+      throw ArgumentError("O tipo não pode ser vazio.");
+    }
+  }
 
-    // Método para exibir dados do motor
-    public void exibirMotor() {
-        System.out.println("----- Dados do Motor -----");
-        System.out.println("Potência: " + potencia + " CV");
-        System.out.println("Tipo: " + tipo);
-        System.out.println("--------------------------");
-    }
+  // Exibir dados do motor
+  void exibirMotor() {
+    print("Potência: $potencia cv");
+    print("Tipo: $tipo");
+  }
 }
 
-// Classe Carro
-public class Carro {
-    private String modelo;
-    private Motor motor;
+class Carro {
+  String modelo;
+  Motor motor;
 
-    // Construtor com validação
-    public Carro(String modelo, Motor motor) {
-        if (modelo == null || modelo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Modelo não pode ser vazio.");
-        }
-        if (motor == null) {
-            throw new IllegalArgumentException("Motor deve ser fornecido.");
-        }
-        this.modelo = modelo;
-        this.motor = motor;
+  // Construtor com validação
+  Carro(this.modelo, this.motor) {
+    if (modelo.isEmpty) {
+      throw ArgumentError("O modelo não pode ser vazio.");
     }
+    if (motor == null) {
+      throw ArgumentError("Motor inválido.");
+    }
+  }
 
-    // Método para exibir dados do carro
-    public void exibirCarro() {
-        System.out.println("===== Dados do Carro =====");
-        System.out.println("Modelo: " + modelo);
-        motor.exibirMotor(); // exibe dados do motor
-        System.out.println("==========================\n");
-    }
+  // Exibir carro completo
+  void exibirCarro() {
+    print("Modelo: $modelo");
+    print("Motor:");
+    motor.exibirMotor();
+    print("----------------------");
+  }
 }
 
-// Classe Main
-public class Main {
-    public static void main(String[] args) {
-        // Criando 2 motores diferentes
-        Motor motor1 = new Motor(150, "Flex");
-        Motor motor2 = new Motor(200, "Diesel");
+void main() {
+  try {
+    // Criando motores
+    Motor m1 = Motor(150, "Gasolina");
+    Motor m2 = Motor(200, "Diesel");
 
-        // Criando 2 carros diferentes, cada um com um motor
-        Carro carro1 = new Carro("Toyota Corolla", motor1);
-        Carro carro2 = new Carro("Ford Ranger", motor2);
+    // Criando carros (cada um com seu motor)
+    Carro c1 = Carro("Civic", m1);
+    Carro c2 = Carro("Hilux", m2);
 
-        // Exibindo os dados completos de cada carro
-        carro1.exibirCarro();
-        carro2.exibirCarro();
-    }
+    // Exibindo dados completos
+    c1.exibirCarro();
+    c2.exibirCarro();
+
+  } catch (e) {
+    print("Erro: $e");
+  }
 }
